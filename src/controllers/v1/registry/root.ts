@@ -5,5 +5,5 @@ const registryRouter = express.Router()
 
 // Change to post in prod
 registryRouter.get('/login', login)
-registryRouter.get('/register', register)
+registryRouter.post('/register', register)
 export default registryRouter
