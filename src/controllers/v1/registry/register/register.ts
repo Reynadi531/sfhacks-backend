@@ -21,24 +21,11 @@ const login = async (req: Request, res: Response) => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
   )
   const numberRegex = new RegExp(/^[0-9]+$/)
-  const ageRegex = new RegExp(/^[0-9]+$/)
   if (
     !emailRegex.test(email) ||
     !passwordRegex.test(password) ||
     !numberRegex.test(number) ||
-    !ageRegex.test(age)
-  ) {
-    return res.status(400).json({
-      message: 'bad request',
-      status: 400,
-      data: {}
-    })
-  }
-
-  // Validate if the number and age is an integer
-  if (
-    !Number.isInteger(Number(parseInt(number))) ||
-    !Number.isInteger(Number(parseInt(age)))
+    !numberRegex.test(age)
   ) {
     return res.status(400).json({
       message: 'bad request',
@@ -80,8 +67,8 @@ const login = async (req: Request, res: Response) => {
         name: name,
         email: email,
         password: passwordHash,
-        number: number,
-        age: age,
+        number: parseInt(number),
+        age: parseInt(age),
         gender: gender
       },
       {
