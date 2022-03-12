@@ -1,0 +1,23 @@
+version: "3"
+services:
+  sfhacks-backend: 
+    container_name: sfhacks_backend
+    build:
+      context: ../
+      dockerfile: docker/dev.Dockerfile
+    volumes:
+      - ../:/app
+    ports:
+      - 3000:3000
+    env_file:
+      - app.env
+    
+  mongo:
+    container_name: mongo_dev
+    image: mongo
+    env_file:
+      - db.env
+    ports:
+      - 27017:27017
+    volumes:
+      - $PWD/docker/data/db:/data/db
