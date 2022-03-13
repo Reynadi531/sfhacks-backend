@@ -25,7 +25,11 @@ const userSchema = new mongoose.Schema({
   password: stringRequired,
   number: numberRequired,
   age: numberRequired,
-  gender: stringRequired
+  gender: stringRequired,
+  isSupervisor: {
+    type: Boolean,
+    required: true
+  }
 })
 
 export default mongoose.model('user_data', userSchema)
