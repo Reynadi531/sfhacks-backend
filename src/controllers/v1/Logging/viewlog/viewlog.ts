@@ -13,9 +13,9 @@ const viewlog = async (_req: Request, res: Response) => {
     return undefined
   })
   if (!query) {
-    return res.status(500).json({
-      status: 500,
-      message: 'internal server error',
+    return res.status(404).json({
+      status: 404,
+      message: 'user log data not found',
       data: {}
     })
   }
@@ -23,7 +23,7 @@ const viewlog = async (_req: Request, res: Response) => {
     status: 200,
     message: 'success',
     data: {
-      logs: query.logs
+      logs: query.logs ? query.logs : []
     }
   })
 }
