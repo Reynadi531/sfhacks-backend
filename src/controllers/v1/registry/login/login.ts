@@ -73,7 +73,7 @@ const login = (req: Request, res: Response) => {
             })
           }
 
-          const jwt = generateJWT(doc['userid'])
+          const jwt = await generateJWT(doc['userid'])
           return res.status(200).json({
             status: 200,
             message: 'Logged in',
