@@ -5,9 +5,9 @@ import bcrypt from 'bcrypt'
 const login = async (req: Request, res: Response) => {
   //Validate all data
   const { body } = req
-  const { email, password, name, number, age } = body
+  const { email, password, name, number, age, isSupervisor } = body
   const gender: string = body.gender ? body.gender : 'NOT SPECIFIED'
-  if (!email || !password || !name || !number || !age)
+  if (!email || !password || !name || !number || !age || !isSupervisor)
     return res.status(400).json({
       message: 'bad request',
       status: 400,
@@ -25,7 +25,8 @@ const login = async (req: Request, res: Response) => {
     !emailRegex.test(email) ||
     !passwordRegex.test(password) ||
     !numberRegex.test(number) ||
-    !numberRegex.test(age)
+    !numberRegex.test(age) ||
+    !numberRegex.test(isSupervisor)
   ) {
     return res.status(400).json({
       message: 'bad request',
@@ -69,7 +70,8 @@ const login = async (req: Request, res: Response) => {
         password: passwordHash,
         number: parseInt(number),
         age: parseInt(age),
-        gender: gender
+        gender: gender,
+        isSupervisor: parseInt(isSupervisor) == 1
       },
       {
         upsert: true
